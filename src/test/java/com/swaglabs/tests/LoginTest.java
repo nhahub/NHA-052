@@ -1,5 +1,4 @@
 package com.swaglabs.tests;
-
 import com.swaglabs.pages.LoginPage;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -65,7 +64,6 @@ public class LoginTest {
         System.out.println("Testing with User: " + username + ", Expected: " + expectedResult);
 
         if (expectedResult.startsWith("SUCCESS")) {
-            // Check for successful navigation (assuming you implemented this validation)
             Assert.assertTrue(loginPage.isProductsPageDisplayed(),
                     "Login should have been successful for user: " + username);
 
@@ -136,6 +134,9 @@ public class LoginTest {
         chromeOptions.addArguments("--start-maximized");
         driver =new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        
+
+
 
         driver.get("https://www.saucedemo.com/");
     }

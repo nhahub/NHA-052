@@ -14,9 +14,8 @@ public class LoginPage {
     private final By username = By.id("user-name");//items' id's in website
     private final By password = By.id("password");
     private final By login = By.id("login-button");
-    // **NEW LOCATORS FOR VALIDATIONS**
-    private final By errorMessageContainer = By.xpath("//div[@class='error-message-container error']");
-    private final By productsHeader = By.xpath("//span[text()='Products']"); // Locator to verify successful login (on the next page)
+    private final By errorMessageContainer = By.className("error-message-container");
+    private final By productsHeader = By.className("title");
 
     //action: click login button
     public void login(String userName,String pass){
@@ -34,7 +33,7 @@ public class LoginPage {
             WebElement errorElement = driver.findElement(errorMessageContainer);
             return errorElement.isDisplayed() && errorElement.getText().contains(expectedErrorText);
         } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false; // Error element not even present
+            return false; // Error element not present
         }
     }
 
@@ -45,24 +44,12 @@ public class LoginPage {
      */
     public boolean isProductsPageDisplayed() {
         try {
-            // Wait for the element to be present/visible (recommended in real tests)
-            // For simplicity here, we just check existence and visibility
+            // Wait for the element to be present/visible , like implicit wait
             return driver.findElement(productsHeader).isDisplayed();
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
     }
 
-    /**
-     * Retrieves the error message text. Useful for asserting the exact message.
-     * @return The text of the error message, or an empty string if not found.
-     */
-    public String getErrorMessageText() {
-        try {
-            return driver.findElement(errorMessageContainer).getText();
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return "";
-        }
-    }
 
 }

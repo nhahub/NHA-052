@@ -1,4 +1,6 @@
 package com.swaglabs.tests;
+
+import com.swaglabs.drivers.DriverSetup;
 import com.swaglabs.pages.LoginPage;
 import com.swaglabs.utils.BrowserActions;
 import org.apache.poi.ss.usermodel.Row;
@@ -8,6 +10,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,6 +24,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 public class LoginTest {
+    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     public WebDriver driver;
 
 //DATA DRIVEN TEST FROM EXCEL
@@ -77,7 +82,6 @@ public class LoginTest {
     }
 
 
-
 //    @Test
 //    public void loginTest1(){
 //        LoginPage loginPage = new LoginPage(driver);
@@ -129,21 +133,17 @@ public class LoginTest {
 //    }
 
     @BeforeMethod
-    public void setUp(){
-
-        ChromeOptions chromeOptions=new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-
-        driver =new ChromeDriver(chromeOptions);
-
-        //could cause concurrency issues
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        new LoginPage(driver).navigateToLoginPage();
+    public void setUp() {
+        driver = DriverSetup.driverSetup();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.navigateToLoginPage();
+//        loginPage.login();
+//        loginPage.login("standard_user", "secret_sauce");
     }
+
     //close chrome tabs after test cases
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }

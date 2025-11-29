@@ -1,9 +1,13 @@
 package com.swaglabs.pages;
 
+import com.swaglabs.utils.BrowserActions;
 import com.swaglabs.utils.ElementActions;
+import com.swaglabs.utils.WaitClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.nio.file.Watchable;
 
 
 public class LoginPage {
@@ -18,6 +22,9 @@ public class LoginPage {
     private final By errorMessageContainer = By.className("error-message-container");
     private final By productsHeader = By.className("title");
 
+    public void navigateToLoginPage(){
+        BrowserActions.openURL(driver, "https://saucedemo.com/");
+    }
 
     //actions
     public void enterUserName(String userName){
@@ -35,6 +42,8 @@ public class LoginPage {
         enterPassword(password);
         clickLogin();
     }
+
+    //validations
     public boolean isErrorMessageDisplayed(String expectedErrorText) {
         try {
             WebElement errorElement = driver.findElement(errorMessageContainer);
@@ -45,7 +54,8 @@ public class LoginPage {
     }
     public boolean isProductsPageDisplayed() {
         try {
-            return driver.findElement(productsHeader).isDisplayed();
+            WaitClass.waitForElementVisible(driver, productsHeader);
+            return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }

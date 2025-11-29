@@ -1,5 +1,6 @@
 package com.swaglabs.tests;
 import com.swaglabs.pages.LoginPage;
+import com.swaglabs.utils.BrowserActions;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -132,13 +133,13 @@ public class LoginTest {
 
         ChromeOptions chromeOptions=new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
+
         driver =new ChromeDriver(chromeOptions);
+
+        //could cause concurrency issues
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        
 
-
-
-        driver.get("https://www.saucedemo.com/");
+        new LoginPage(driver).navigateToLoginPage();
     }
     //close chrome tabs after test cases
     @AfterMethod

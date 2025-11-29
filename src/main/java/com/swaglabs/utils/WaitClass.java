@@ -12,33 +12,35 @@ public class WaitClass {
     //1 .present 2.visible 3.clickable
 
     //prevent constructor
-    private WaitClass(){};
+    private WaitClass() {
+    }
 
-    public static WebElement waitForElementPresent(WebDriver driver, By locator)
-    {   //explicit wait on elem to become present
+
+    public static WebElement waitForElementPresent(WebDriver driver, By locator) {   //explicit wait on elem to become present
         //max wait 5 secs , if not found through a Timeout exception
 
         return new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(
-                //generic driver , avoided naming it driver
-                genericDriver -> genericDriver.findElement(locator)
-        );
+                        //generic driver , avoided naming it driver
+                        genericDriver -> genericDriver.findElement(locator)
+                );
     }
 
     //wait for element to be visible
-    public static WebElement waitForElementVisible(WebDriver driver, By locator){
+    public static WebElement waitForElementVisible(WebDriver driver, By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(
-                       genericDriver-> {
-                           WebElement e = waitForElementPresent(driver, locator);
-                           return e.isDisplayed() ? e : null;
-                       }
-                       );
+                        genericDriver -> {
+                            WebElement e = waitForElementPresent(driver, locator);
+                            return e.isDisplayed() ? e : null;
+                        }
+                );
     }
-    public static WebElement waitForElementClickable(WebDriver driver, By locator){
+
+    public static WebElement waitForElementClickable(WebDriver driver, By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(
-                        genericDriver-> {
+                        genericDriver -> {
                             WebElement e = waitForElementVisible(driver, locator);
                             return e.isEnabled() ? e : null;
                         }

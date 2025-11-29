@@ -1,5 +1,6 @@
 package com.swaglabs.pages;
 
+import com.swaglabs.utils.ElementActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,43 +14,40 @@ public class LoginPage {
     //locators : those who locate elements in website's html
     private final By username = By.id("user-name");//items' id's in website
     private final By password = By.id("password");
-    private final By login = By.id("login-button");
+    private final By loginBtn = By.id("login-button");
     private final By errorMessageContainer = By.className("error-message-container");
     private final By productsHeader = By.className("title");
 
-    //action: click login button
-    public void login(String userName,String pass){
-        driver.findElement(username).sendKeys(userName);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(login).click();
+
+    //actions
+    public void enterUserName(String userName){
+        ElementActions.sendData(driver, username, userName);
+    }
+    public void enterPassword(String passwordStr){
+            ElementActions.sendData(driver,password,passwordStr);
     }
 
-    /**
-     * Checks if a specific error message is displayed on the login page.
-     * @return true if the error message is visible and matches the expected text, false otherwise.
-     */
+    public void clickLogin(){
+        ElementActions.clickElement(driver, loginBtn);
+    }
+    public void login(String username, String password){
+        enterUserName(username);
+        enterPassword(password);
+        clickLogin();
+    }
     public boolean isErrorMessageDisplayed(String expectedErrorText) {
         try {
             WebElement errorElement = driver.findElement(errorMessageContainer);
             return errorElement.isDisplayed() && errorElement.getText().contains(expectedErrorText);
         } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false; // Error element not present
+            return false; // Error element not even present
         }
     }
-
-    /**
-     * Checks if the user is on the Products page (successful login).
-     * NOTE: This assumes successful login navigates to a page with a "Products" header.
-     * @return true if the Products header is visible, false otherwise.
-     */
     public boolean isProductsPageDisplayed() {
         try {
-            // Wait for the element to be present/visible , like implicit wait
             return driver.findElement(productsHeader).isDisplayed();
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
     }
-
-
 }

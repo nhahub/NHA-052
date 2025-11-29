@@ -1,0 +1,5 @@
+page object model design pattern involves having each website page as an object
+
+in java pkg we have locators , functions to act on locators , validation funcs
+
+test cases will be in test pkg

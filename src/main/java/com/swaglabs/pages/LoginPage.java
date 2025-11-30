@@ -7,9 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.nio.file.Watchable;
-
-
 public class LoginPage {
     WebDriver driver;
     public LoginPage(WebDriver driver){
@@ -22,11 +19,13 @@ public class LoginPage {
     private final By errorMessageContainer = By.className("error-message-container");
     private final By productsHeader = By.className("title");
 
+
+
+    //actions
     public void navigateToLoginPage(){
         BrowserActions.openURL(driver, "https://saucedemo.com/");
     }
 
-    //actions
     public void enterUserName(String userName){
         ElementActions.sendData(driver, username, userName);
     }

@@ -10,6 +10,7 @@
             <class name="com.swaglabs.tests.LoginTest"/>
             <class name="com.swaglabs.tests.ProductsTest"/>
             <class name="com.swaglabs.tests.CartTest"/>
+            <class name="com.swaglabs.tests.CheckoutInfoTest"/>
         </classes>
     </test>
 

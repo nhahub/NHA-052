@@ -20,9 +20,22 @@ public class CartPage {
     // Specific locator for the backpack item title
     private final By backpackItemTitle = By.xpath("//div[@class='inventory_item_name' and text()='Sauce Labs Backpack']");
 
+    // Locators for NEW Test Cases (Removal & Navigation)
+    private final By firstItemRemoveButton = By.id("remove-sauce-labs-backpack");
+    private final By continueShoppingButton = By.id("continue-shopping");
+    private final By itemImage = By.className("inventory_item_img");
+
     // Actions
     public void clickCheckout() {
         ElementActions.clickElement(driver, checkoutButton);
+    }
+
+    public void clickContinueShopping() {
+        ElementActions.clickElement(driver, continueShoppingButton);
+    }
+
+    public void removeItem() {
+        ElementActions.clickElement(driver, firstItemRemoveButton);
     }
 
     // Validations
@@ -30,15 +43,11 @@ public class CartPage {
         try {
             WaitClass.waitForElementVisible(driver, cartHeader);
             return driver.findElement(cartHeader).getText().equals("Your Cart");
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
     }
 
-    /**
-     * Checks if a specific item (Sauce Labs Backpack) is present in the cart.
-     * @return true if the item title is visible in the cart list.
-     */
     public boolean isBackpackItemPresent() {
         try {
             return driver.findElement(backpackItemTitle).isDisplayed();
@@ -47,11 +56,16 @@ public class CartPage {
         }
     }
 
-    /**
-     * Counts the total number of unique items currently in the cart.
-     * @return The count of cart items.
-     */
     public int getCartItemCount() {
         return driver.findElements(cartItem).size();
+    }
+
+    public boolean areItemImagesDisplayed() {
+        // Checks that at least one image is present and visible
+        try {
+            return driver.findElement(itemImage).isDisplayed();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
     }
 }

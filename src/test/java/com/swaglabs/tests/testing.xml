@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SwagLabs Automation Test Suite" verbose="1">
+
+    <parameter name="browser" value="Chrome"/>
+
+    <test name="End-to-End Regression Tests">
+        <classes>
+            <class name="com.swaglabs.tests.LoginTest"/>
+            <class name="com.swaglabs.tests.ProductsTest"/>
+            <class name="com.swaglabs.tests.CartTest"/>
+        </classes>
+    </test>
+
+</suite>

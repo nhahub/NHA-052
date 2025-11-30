@@ -2,14 +2,11 @@ package com.swaglabs.tests;
 
 import com.swaglabs.drivers.DriverSetup;
 import com.swaglabs.pages.LoginPage;
-import com.swaglabs.utils.BrowserActions;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -21,14 +18,10 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Duration;
 
 public class LoginTest {
-    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     public WebDriver driver;
-
 //DATA DRIVEN TEST FROM EXCEL
-
     //data provider returns a 2d arr of rows and cols of data
     @DataProvider(name = "loginDataProviderMethod")
     public Object[][] getLoginData() throws IOException {

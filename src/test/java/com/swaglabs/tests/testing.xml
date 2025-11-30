@@ -5,7 +5,7 @@
 
     <parameter name="browser" value="Chrome"/>
 
-    <test name="End-to-End Regression Tests">
+    <test name="All tests">
         <classes>
             <class name="com.swaglabs.tests.LoginTest"/>
             <class name="com.swaglabs.tests.ProductsTest"/>
